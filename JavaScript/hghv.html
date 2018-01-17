@@ -1,0 +1,95 @@
+
+<html>
+	<head>
+		<title>Javascript Game</title>
+		<script type = "text/javascript" src = "ball.js"></script>
+	</head>
+	<body>
+		
+		
+		<canvas 
+			style="border:1px solid #000000;" 
+			id = "mycanvas" 
+			width = "500" 
+			height = "500">
+			
+			Your browser does not support canvas
+		</canvas>
+
+		<script>
+		
+		window.addEventListener("load", myApp, false);
+
+
+		function myApp() {
+			var canvas;
+			var context;
+			var b1, b2, b3, b4, b5;
+			var arr;
+			var num1, num2, num3, num4, num5;
+			
+			
+			function getCanvas() {
+				var tmp;
+				
+				tmp = document.getElementById ("mycanvas");
+				
+				if (tmp == null) {
+					alert ("no canvas");
+				}
+				
+				return tmp;
+					
+			}
+
+			function animateMe() {
+				var counter;
+				
+				context.clearRect (0, 0, canvas.width, canvas.height);
+	
+				for (counter = 0; counter < 1000; counter++) {
+					b1 = arr[counter];
+
+					b1.draw(context);				
+					b1.move();
+					b1.bounce(canvas);
+
+				}
+			
+				requestAnimationFrame (animateMe);
+			}
+
+			canvas = getCanvas();	
+			context = canvas.getContext ("2d");
+			
+			init();
+			
+			function init() {
+				
+				var counter;
+
+				arr = new Array();
+
+				for (counter = 0; counter < 1000; counter++) {
+					b1 = new Ball(
+						Math.floor (Math.random() * 500), 
+						Math.floor (Math.random() * 500), 
+						1 + Math.floor (Math.random() * 6), 
+						1 + Math.floor (Math.random() * 0,1), 
+						10 + Math.floor (Math.random() * 0,1), 
+						);
+					arr[counter] = b1;
+				}
+				
+
+				animateMe();
+				
+			}			
+
+		}
+				
+		</script>
+		
+	</body>
+		
+</html>

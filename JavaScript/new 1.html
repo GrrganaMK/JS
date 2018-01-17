@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Christmas greeting card</title>
+<style>
+h2 {color:red}
+</style>
+<script src = "ball.js"></script>
+</head>
+<body>
+<canvas 
+	style='border:1px solid #000000;' 
+	id='mycanvas'
+	width='600'
+	height='500'>
+Your browser doesn't support canvas
+</canvas>
+
+<script>
+	window.addEventListener('load',myApp,false);
+
+	function myApp() {
+		var canvas;
+		var context;
+		var b1, b2;
+		var img;
+		var textToShow;
+		var x, y;
+		var snd;
+		
+		
+		function getCanvas() {
+			var tmp;
+
+			tmp = document.getElementById ("mycanvas");
+				
+			if (tmp == null) {
+				alert ("no canvas");
+			}
+					
+			return tmp;
+					
+		}
+		function Snowflake() {
+    this.x = Math.random()*canvas.width;
+    this.y = -16;
+    this.speed = Math.random()*3+1;
+    this.direction = Math.random()*360;
+    this.maxSpeed = 4
+	}
+		
+    
+	function animateMe() {
+		context.clearRect (0, 0, canvas.width, canvas.height);
+
+		context.drawImage (img, 0, 0, canvas.width, canvas.height);
+
+		context.fillStyle = "red";
+		context.font = "40px Arial";
+		context.fillText (textToShow, x, y);
+
+		b1.draw(context);
+		b2.draw(context);
+		b3.draw(context);
+		b4.draw(context);
+						
+		b1.move();
+		b2.move();
+		b3.move();				
+		b4.move();
+				
+		requestAnimationFrame (animateMe);
+	}
+
+	canvas = getCanvas();	
+	context = canvas.getContext ("2d");
+    context.fillStyle = '#0000FF';
+	context.fillRect(0, 0, canvas.width, canvas.height);
+	
+	init();
+				
+	function init() {
+		textToShow="Merry Christmas";
+		x=150;
+		y=50;
+				
+		img = new Image();
+		img.src = "Christmas.jpg";
+		
+		snd = new Audio("C:\\Users\\Bobi\\Desktop\\JavaScript\\a.mp3");
+//		snd.volume = 0.2;
+//		snd.play();
+
+		b1 = new Ball(1, 2, 2, 2, 20, "white");
+		b2 = new Ball(1, 2, -2, -2, 50, "white");
+		b3 = new Ball(1, 2, 4, 2, 20, "white");
+		b4 = new Ball(1, 2, 2, 1, 30, "white")
+}
+</script>
+</body>
+</html>
